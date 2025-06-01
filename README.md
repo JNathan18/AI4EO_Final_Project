@@ -51,7 +51,7 @@ This project was developed as the final assignment for the GEOL0069 (AI for Eart
 
 In this project, we apply supervised learning to extract a range of shallow reef features from satellite imagery. We focus on data from Sentinel-2, chosen for its high-resolution multispectral capabilities; an essential requirement for our algorithm of choice, the Convolutional Neural Network (CNN). The aim is to demonstrate how modern ML tools can support ecological monitoring by providing a minimal-footprint workflow that anyone can run on free Sentinel-2 imagery to generate habitat predictions from scratch with only a handful of hand-labelled pixels.
 
-### Background
+## Background
 
 Shallow reef zones are among the most biodiverse ecosystems on Earth, supporting nearly 25% of all marine species. These structures play vital roles in coastal protection, fisheries, and global biodiversity. However, they are increasingly under threat from climate change, coral bleaching, pollution, and destructive human activity.
 
@@ -61,10 +61,10 @@ Traditional benthic surveys cannot keep pace across thousands of dispersed reefs
 
 ## Key Concepts
 
-## Sentinel-2 — why we use it for lightweight reef classification  
+### Sentinel-2 — why we use it for lightweight reef classification  
 ![Sentinel-2 multi-band imaging overview](https://github.com/JNathan18/Banner/blob/main/image.png)
 
-### Mission at a glance  
+#### Mission at a glance  
 Sentinel-2 is part of ESA’s **Copernicus** fleet and comprises the twin satellites **Sentinel-2A** (2015) and **Sentinel-2B** (2017).  
 They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 
@@ -74,7 +74,7 @@ They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 | **Swath width** | 290 km | One pass covers entire archipelagos |
 | **Local overpass** | ~10 : 30 a.m. LTAN | Consistent illumination → easier atmospheric correction |
 
-### The Multi-Spectral Instrument (MSI)  
+#### The Multi-Spectral Instrument (MSI)  
 * Push-broom scanner (linear focal plane).  
 * Three mirrors fold the light path, then a beam-splitter feeds **two focal-plane assemblies (FPAs)**:  
   * **VNIR FPA:** 0.433–0.948 µm  
@@ -86,7 +86,7 @@ They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 | **VNIR** | B1 443, **B2 490 (Blue)**, **B3 560 (Green)**, **B4 665 (Red)**, B5 705, B6 740, B7 783, **B8 842 (NIR)**, B8A 865, B9 945 | 10 m (B2–B4, B8) <br>20 m (B5–B9) |
 | **SWIR** | B10 1375, B11 1610, B12 2190 | 60 m (B10) <br>20 m (B11–B12) |
 
-### Why only Blue, Green, Red & NIR for this project  
+#### Why only Blue, Green, Red & NIR for this project  
 1. **All at 10 m** → keeps spatial detail consistent.  
 2. Blue/Green penetrate the water column; Red enhances benthic discrimination; NIR gives razor-sharp land/water masks.  
 3. Four channels = smaller tensors → faster training & real-time inference on edge devices.
