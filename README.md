@@ -140,7 +140,7 @@ A lightweight CNN like ours may confuse deep ocean noise for genuine reef signal
    Intelligently Reinforced Image Segmentation (IRIS) software auto-classifies polygons and exports pixel-wise masks.
 
 5. **Build a balanced training set**  
-   Sample equal numbers of patches per class; apply class-weight tweaks for minority classes.
+   Sample equal numbers of patches per class.
 
 6. **Train the CNN**  
    Two-block ConvNet, Early-Stopping, ReduceLR; NDWI included as an extra input channel.
