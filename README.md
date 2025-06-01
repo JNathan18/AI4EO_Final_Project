@@ -186,6 +186,7 @@ Developed in [Google Colab](https://colab.research.google.com/), this project le
    Inline comments provide further guidance throughout.
 
 ## Contact
-Jonathan McLennan - [jonomclennan@gmail.com](mailto:jonomclennan@gmail.com)
-Project Link - 
+Jonathan McLennan - [jonomclennan@gmail.com](mailto:jonomclennan@gmail.com) / [zcapmcl@ucl.ac.uk](mailto:zcapmcl@ucl.ac.uk) / [https://www.linkedin.com/in/jonathan-mclennan](https://www.linkedin.com/in/jonathan-mclennan-172039236/)
+
+Project Link: 
 
