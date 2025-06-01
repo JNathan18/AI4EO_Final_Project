@@ -135,9 +135,31 @@ $$
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Methodology
-[Describe your overall approach or algorithm.  
-Bullet points or sub-headings (“Data Pre-processing”, “Model”, “Evaluation”) often read well here.]
+## End-to-End Workflow at a Glance
+
+1. **Select cloud-free Sentinel-2 tiles**  
+   Query neighbouring tiles acquired on the same date to guarantee spectral consistency.
+
+2. **Compute an NDWI filter**  
+   An NDWI layer will also be added as a 5ᵗʰ channel to every 11 × 11 patch.
+
+3. **Define Regions of Interest (ROIs)**  
+   Draw polygons on one “reference” tile covering reef flat, shallow sand, etc.
+
+4. **Label the ROIs with IRIS**  
+   Intelligently Reinforced Image Segmentation (IRIS) software auto-classifies polygons and exports pixel-wise masks.
+
+5. **Build a balanced training set**  
+   Sample equal numbers of patches per class; apply class-weight tweaks for minority classes.
+
+6. **Train the CNN**  
+   Two-block ConvNet, Early-Stopping, ReduceLR; NDWI included as an extra input channel.
+
+7. **Roll-out on the unseen tile**  
+   Predict on a second, previously untouched tile; NDWI recomputed on-the-fly;  CodeCarbon logs CO₂, kWh, CPU/GPU power for the inference run.
+
+8. **Evaluate & analyse**  
+   This includes a Confusion matrix as well as f1-scores, precision, recall and accuracy for our classes, overlay of our classification against the ACA as the ground truth.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
