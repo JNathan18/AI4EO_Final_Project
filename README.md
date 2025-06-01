@@ -145,7 +145,7 @@ A lightweight CNN like ours may confuse deep ocean noise for genuine reef signal
    Sample equal numbers of patches per class.
 
 6. **Train the CNN**  
-   Two-block ConvNet, Early-Stopping, ReduceLR; NDWI included as an extra input channel.
+   Two-block ConvNet, Early-Stopping, ReduceLR; NDWI included as an extra input channel. CodeCarbon measures environmental impact of training.
 
 7. **Roll-out on the unseen tile**  
    Predict on a second, previously untouched tile; NDWI recomputed on-the-fly;  CodeCarbon logs CO₂, kWh, CPU/GPU power for the inference run.
