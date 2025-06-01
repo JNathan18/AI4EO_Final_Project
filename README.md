@@ -92,9 +92,9 @@ A Convolutional Neural Network is the deep-learning work-horse for image recogni
 
 **How it works**
 
-1. **Feature-extraction stage** — Every convolutional layer slides a tiny filter (11 × 11 pixels in our case) over the input, multiplying and summing to produce a feature map. Non-linear activations (ReLU) follow, and an occasional pooling step downsamples the map, keeping only the most salient responses.  Because the same weights are reused everywhere (weight sharing), the network is compact and learns position-invariant patterns.
+1. **Feature-extraction stage:** Every convolutional layer slides a tiny filter (11 × 11 pixels in our case) over the input, multiplying and summing to produce a feature map. Non-linear activations (ReLU) follow, and an occasional pooling step downsamples the map, keeping only the most salient responses.  Because the same weights are reused everywhere (weight sharing), the network is compact and learns position-invariant patterns.
 
-2. **Classification stage** — Once enough feature maps have been stacked, the 3-D tensor is flattened and fed to one or more fully-connected layers.  These dense neurons mix the extracted cues and output a probability for each class via a soft-max function.
+2. **Classification stage:** Once enough feature maps have been stacked, the 3-D tensor is flattened and fed to one or more fully-connected layers.  These dense neurons mix the extracted cues and output a probability for each class via a soft-max function.
 
 <div align="center">
 
@@ -104,15 +104,13 @@ A Convolutional Neural Network is the deep-learning work-horse for image recogni
 
 ### Why we chose a CNN for reef mapping
 
-* **Locality at 10 m** – Convolutions inspect only a handful of pixels at a time, perfect for teasing apart benthic textures (live coral, algae, sand) that occupy just a few Sentinel-2 pixels.
-
-* **Model economy** – With only the four 10 m bands (Blue, Green, Red, NIR) as input, a shallow CNN compiles to < 1 MB when quantised.  That means real-time inference on edge devices (drones, Raspberry Pi) without a GPU.
+Convolutions inspect only a handful of pixels at a time, perfect for teasing apart benthic textures (live coral, algae, sand) that occupy just a few Sentinel-2 pixels. With only the four 10 m bands (Blue, Green, Red, NIR) as input, a shallow CNN compiles to < 1 MB when quantised.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## NDWI  
 
-The **Normalised Difference Water Index (NDWI)** was introduced by McFeeters (1996) as a simple way to highlight open water using only two spectral bands:
+The Normalised Difference Water Index (NDWI) was introduced by McFeeters (1996) as a simple way to highlight open water using only two spectral bands:
 
 $$
 \text{NDWI} = \frac{\text{Green} - \text{NIR}}{\text{Green} + \text{NIR}}
@@ -122,16 +120,8 @@ $$
 * **Value range** — NDWI ∈ [-1, +1].  Positive values tend to mark water; negative values mark vegetation, bare land, or coral substrate.
 
 ### Why include NDWI in our pipeline?  
-
-1. **Sharper land–water boundaries**  
-   A lightweight CNN like ours may confuse deep ocean noise for genuine reef signals.  NDWI provides a strong, scale-robust cue that helps the CNN learn where “wet” ends and “dry” 
-   begins.
-
-2. **Complement to raw bands**  
-   The index is invariant to overall brightness (ratio form), so it supplies contrast information that the four raw Sentinel-2 bands (Blue, Green, Red, NIR) do not capture on their own.
-
-3. **Lightweight to compute**  
-   It is a one-line arithmetic operation performed on-the-fly during data loading.
+ 
+A lightweight CNN like ours may confuse deep ocean noise for genuine reef signals. By introducing an NDWI filter, we reduce spurious detections by masking out areas unlikely to contain water. The index is also invariant to overall brightness (ratio form), so it supplies contrast information that the four raw Sentinel-2 bands (Blue, Green, Red, NIR) do not capture on their own. This gives the CNN crucial context for distinguishing where ‘wet’ ends and ‘dry’ begins. On top of this it is lightweight on compute and can be performed as a one line operation on-the-fly during data loading.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
