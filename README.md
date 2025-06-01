@@ -3,7 +3,7 @@
 
 <!-- PROJECT LOGO / BANNER -->
 <!-- Replace the src URL or delete completely -->
-![title_banner](https://example.com/your_banner.png)
+![title_banner](https://www.etsy.com/uk/listing/786274974/great-barrier-reef-satellite-imagery)
 
 <h1 align="center">[PROJECT TITLE]</h1>
 <p align="center">
