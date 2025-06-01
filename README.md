@@ -110,6 +110,31 @@ A Convolutional Neural Network is the deep-learning work-horse for image recogni
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## NDWI  
+
+The **Normalised Difference Water Index (NDWI)** was introduced by McFeeters (1996) as a simple way to highlight open water using only two spectral bands:
+
+$$
+\text{NDWI} = \frac{\text{Green} - \text{NIR}}{\text{Green} + \text{NIR}}
+$$
+
+* **Sentinel-2 band mapping** — Green = B3 (560 nm); NIR = B8 (842 nm).  
+* **Value range** — NDWI ∈ [-1, +1].  Positive values tend to mark water; negative values mark vegetation, bare land, or coral substrate.
+
+### Why include NDWI in our pipeline?  
+
+1. **Sharper land–water boundaries**  
+   A lightweight CNN like ours may confuse deep ocean noise for genuine reef signals.  NDWI provides a strong, scale-robust cue that helps the CNN learn where “wet” ends and “dry” 
+   begins.
+
+2. **Complement to raw bands**  
+   The index is invariant to overall brightness (ratio form), so it supplies contrast information that the four raw Sentinel-2 bands (Blue, Green, Red, NIR) do not capture on their own.
+
+3. **Lightweight to compute**  
+   It is a one-line arithmetic operation performed on-the-fly during data loading.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Methodology
 [Describe your overall approach or algorithm.  
 Bullet points or sub-headings (“Data Pre-processing”, “Model”, “Evaluation”) often read well here.]
