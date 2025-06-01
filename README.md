@@ -59,8 +59,7 @@ Accurately classifying these features using satellite imagery and machine learni
 
 Traditional benthic surveys cannot keep pace across thousands of dispersed reefs, and global mapping products like the Allen Coral Atlas, although invaluable, are computationally heavy and rely on extensive training data that may not exist for every site. Because our pipeline needs just two co-registered tiles, the method can be ported along a reef tract in hours, supporting near-real-time monitoring after storms or heatwaves.
 
-## Sentinel-2 — why we use it for lightweight reef classification  
-![Sentinel-2 multi-band imaging overview](https://github.com/JNathan18/Banner/blob/main/image.png)
+## Sentinel-2 
 
 ### Mission at a glance  
 Sentinel-2 is part of ESA’s **Copernicus** fleet and comprises the twin satellites **Sentinel-2A** (2015) and **Sentinel-2B** (2017).  
@@ -72,17 +71,9 @@ They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 | **Swath width** | 290 km | One pass covers entire archipelagos |
 | **Local overpass** | ~10 : 30 a.m. LTAN | Consistent illumination → easier atmospheric correction |
 
-### The Multi-Spectral Instrument (MSI)  
-* Push-broom scanner (linear focal plane).  
-* Three mirrors fold the light path, then a beam-splitter feeds **two focal-plane assemblies (FPAs)**:  
-  * **VNIR FPA:** 0.433–0.948 µm  
-  * **SWIR FPA:** 1.37–2.19 µm  
-* **Strip filters** on each detector line create **13 discrete bands**; on-board diffuser + dark shutter handle calibration.
+The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the satellite advances, a single linear detector sweeps out a continuous image strip. Incoming light is folded by three mirrors and split by a beam-splitter onto two focal-plane assemblies—one covering the visible to near-infra-red range (VNIR, 0.43–0.95 µm) and the other the short-wave infra-red (SWIR, 1.37–2.19 µm). Across these FPAs, 13 strip filters carve out the discrete spectral bands used by Sentinel-2: four bands are captured at 10 m ground resolution (blue, green, red, NIR), six at 20 m, and three at 60 m.
 
-| FPA | Bands (λ<sub>c</sub> / nm) | Native GSD |
-|-----|---------------------------|------------|
-| **VNIR** | B1 443, **B2 490 (Blue)**, **B3 560 (Green)**, **B4 665 (Red)**, B5 705, B6 740, B7 783, **B8 842 (NIR)**, B8A 865, B9 945 | 10 m (B2–B4, B8) <br>20 m (B5–B9) |
-| **SWIR** | B10 1375, B11 1610, B12 2190 | 60 m (B10) <br>20 m (B11–B12) |
+![Sentinel-2 multi-band imaging overview](https://github.com/JNathan18/Banner/blob/main/image.png)
 
 ### Why only Blue, Green, Red & NIR for this project  
 1. **All at 10 m** → keeps spatial detail consistent.  
@@ -90,22 +81,45 @@ They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 3. Four channels = smaller tensors → faster training & real-time inference on edge devices.
 4. Enables computation of NDWI masks for our regions
 
-## Convolutional Neural Network — our lightweight reef–classifier core  
+## Convolutional Neural Networks (CNNs)
+
+A **Convolutional Neural Network** is the deep-learning work-horse for image recognition.  
+Conceptually, it mimics the way our visual cortex processes information: small receptive fields
+scan across the scene, detect primitive patterns (edges, corners, colour blobs), and pass
+progressively richer abstractions to later layers that decide *what* the image contains.
+
+**How it works**
+
+1. **Feature-extraction stage** — Every convolutional layer slides a tiny filter  
+   (11 × 11 pixels in our case) over the input, multiplying and summing to produce a *feature map*.  
+   Non-linear activations (ReLU) follow, and an occasional *pooling* step downsamples the map,
+   keeping only the most salient responses.  Because the same weights are reused everywhere
+   (*weight sharing*), the network is compact and learns position-invariant patterns.
+
+2. **Classification stage** — Once enough feature maps have been stacked, the 3-D tensor is
+   flattened and fed to one or more fully-connected layers.  These dense neurons mix the
+   extracted cues and output a probability for each class via a soft-max function.
+
+<div align="center">
+
 ![Convolutional Neural Network architecture](https://github.com/JNathan18/Banner/blob/main/Sen_2_Infographic_cnn.png)
 
-### What is a CNN?
-A Convolutional Neural Network (CNN) is a two-stage pipeline:
+</div>
 
-| Stage | Building blocks | Purpose |
-|-------|-----------------|---------|
-| **Feature extraction** | Convolution → (ReLU) → Pooling  | Learns small, reusable filters that detect shapes, edges, and textures. |
-| **Classification** | Fully-connected layers + Soft-max | Combines those features to assign each input to a class. |
+### Why we chose a CNN for reef mapping
 
-Because the same filters “slide” across the whole image (weight sharing), CNNs capture spatial patterns while keeping the model compact.
+* **Locality at 10 m** – Convolutions inspect only a handful of pixels at a time, perfect for
+  teasing apart benthic textures (live coral, algae, sand) that occupy just a few Sentinel-2
+  pixels.
 
-### Why it fits our reef mapper 
-* **Locality** – Convolutions focus on neighbourhoods just a few pixels wide, ideal for picking up benthic textures at 10 m resolution.  
-* **Lightweight** – A shallow CNN with four 10 m bands (B2-B4, B8) stays under ~1 MB when quantised, so it runs on edge devices and still yields intelligible explanations.
+* **Model economy** – With only the four 10 m bands (Blue, Green, Red, NIR) as input, a shallow
+  CNN compiles to < 1 MB when quantised.  That means real-time inference on edge devices
+  (drones, Raspberry Pi) without a GPU.
+
+* **Explainability hooks** – Gradient-based saliency maps and Grad-CAM can be applied directly to
+  the convolutional feature maps, letting us *see* which reef patches the network relied on and
+  verify that its decisions are geologically sensible.
+
 
 ### Methodology
 [Describe your overall approach or algorithm.  
