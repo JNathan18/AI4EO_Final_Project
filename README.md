@@ -157,15 +157,7 @@ A lightweight CNN like ours may confuse deep ocean noise for genuine reef signal
 
 ## Getting Started
 
-### Prerequisites
-* List software versions, libraries, or accounts needed  
-  ```bash
-  !pip -q install requests shapely rasterio tqdm fiona codecarbon
-  ```
-
-## 🌊 Reef Classification with Sentinel-2 and NDWI (Colab Setup)
-
-This project was developed in [Google Colab](https://colab.research.google.com/), a cloud-based platform for running and sharing Python code. To replicate or extend this project, follow the steps below:
+Developed in [Google Colab](https://colab.research.google.com/), this project leverages cloud-based Python execution for streamlined development and sharing. The following steps will guide you through reproducing or adapting the workflow.
 
 1. **Download the notebook**  
    Get a copy of `CNN Reef Classifier.ipynb` from this repository.
