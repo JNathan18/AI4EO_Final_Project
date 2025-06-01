@@ -62,7 +62,7 @@ Traditional benthic surveys cannot keep pace across thousands of dispersed reefs
 ## Key Concepts
 
 ## Sentinel-2 — why we use it for lightweight reef classification  
-![Sentinel-2 multi-band imaging overview](assets/sentinel2_overview.png)
+![Sentinel-2 multi-band imaging overview](https://github.com/JNathan18/Banner/blob/main/image.png)
 
 ### Mission at a glance  
 Sentinel-2 is part of ESA’s **Copernicus** fleet and comprises the twin satellites **Sentinel-2A** (2015) and **Sentinel-2B** (2017).  
@@ -90,6 +90,7 @@ They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 1. **All at 10 m** → keeps spatial detail consistent.  
 2. Blue/Green penetrate the water column; Red enhances benthic discrimination; NIR gives razor-sharp land/water masks.  
 3. Four channels = smaller tensors → faster training & real-time inference on edge devices.
+4. Enables computation of NDWI masks for our regions
 
 ### Methodology
 [Describe your overall approach or algorithm.  
