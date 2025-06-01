@@ -160,6 +160,36 @@ A lightweight CNN like ours may confuse deep ocean noise for genuine reef signal
 ### Prerequisites
 * List software versions, libraries, or accounts needed  
   ```bash
-  pip install -r requirements.txt
+  !pip -q install requests shapely rasterio tqdm fiona codecarbon
+  ```
 
+## 🌊 Reef Classification with Sentinel-2 and NDWI (Colab Setup)
+
+This project was developed in [Google Colab](https://colab.research.google.com/), a cloud-based platform for running and sharing Python code. To replicate or extend this project, follow the steps below:
+
+1. **Download the notebook**  
+   Get a copy of `CNN Reef Classifier.ipynb` from this repository.
+
+2. **Install prerequisite libraries**
+  ```bash
+  !pip -q install requests shapely rasterio tqdm fiona codecarbon
+  ```
+
+3. **Acquire the required datasets**  
+   - **Sentinel-2 imagery**: This is downloaded locally within our notebook. Tiles are taken from regions around the great barrier reef. A Copernicus account will be needed for data 
+   collection. It is free to set up and once you have verified your account, you may proceed with the download. Input your credentials when prompted in the script.
+   - **Ground truth labels**: We use benthic habitat maps from the [Allen Coral Atlas (ACA)](https://allencoralatlas.org/atlas/#4.57/-16.5163/147.1100).  
+     - Go to the link, select the relevant region (e.g., Torres Strait), download the dataset, extract the files, and note the path to the `.gpkg` or raster layers.
+
+4. **Update file paths in the notebook**  
+   Modify any file paths to match where you’ve saved your datasets:
+   - Update paths to Sentinel-2 `.npy` or `.jp2` files.
+   - Set the path to the ACA mask or shapefile used for evaluation.
+
+   If you are using the same data as the original notebook, minimal changes should be needed.  
+   If using your own data, remember to adjust file names and region-of-interest definitions accordingly.
+
+5. **Run the notebook cells in order**  
+   Each cell walks you through preprocessing, training the CNN, applying the NDWI filter, evaluating predictions, and generating outputs.  
+   Inline comments provide further guidance throughout.
 
