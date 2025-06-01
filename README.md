@@ -218,7 +218,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 Jonathan McLennan - [jonomclennan@gmail.com](mailto:jonomclennan@gmail.com) / [zcapmcl@ucl.ac.uk](mailto:zcapmcl@ucl.ac.uk) / [https://www.linkedin.com/in/jonathan-mclennan](https://www.linkedin.com/in/jonathan-mclennan-172039236/)
 
-Project Link: 
+Project Link: https://github.com/JNathan18/Detection-of-Shallow-Reef-Structures
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
