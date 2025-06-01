@@ -62,39 +62,38 @@ Traditional benthic surveys cannot keep pace across thousands of dispersed reefs
 ## Sentinel-2 
 
 ### Mission at a glance  
-Sentinel-2 is part of ESA’s **Copernicus** fleet and comprises the twin satellites **Sentinel-2A** (2015) and **Sentinel-2B** (2017).  
+Sentinel-2 is part of ESA’s Copernicus fleet and comprises the twin satellites Sentinel-2A (2015) and Sentinel-2B (2017).  
 They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 
 | Parameter | Value | Why it matters for reefs |
 |-----------|-------|--------------------------|
-| **Revisit time** | 10 days per sat, **5 days combined** (equator) | Frequent looks capture bleaching events and seasonal change |
+| **Revisit time** | 10 days per sat, 5 days combined (equator) | Frequent looks capture bleaching events and seasonal change |
 | **Swath width** | 290 km | One pass covers entire archipelagos |
-| **Local overpass** | ~10 : 30 a.m. LTAN | Consistent illumination → easier atmospheric correction |
 
-The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the satellite advances, a single linear detector sweeps out a continuous image strip. Incoming light is folded by three mirrors and split by a beam-splitter onto two focal-plane assemblies—one covering the visible to near-infra-red range (VNIR, 0.43–0.95 µm) and the other the short-wave infra-red (SWIR, 1.37–2.19 µm). Across these FPAs, 13 strip filters carve out the discrete spectral bands used by Sentinel-2: four bands are captured at 10 m ground resolution (blue, green, red, NIR), six at 20 m, and three at 60 m.
+The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the satellite advances, a single linear detector sweeps out a continuous image strip. Incoming light is folded by three mirrors and split by a beam-splitter onto two focal-plane assemblies (FPAs), one covering the visible to near-infra-red range and the other the short-wave infra-red. Across these FPAs, 13 strip filters carve out the discrete spectral bands used by Sentinel-2: four bands are captured at 10 m ground resolution (blue, green, red, NIR), six at 20 m, and three at 60 m.
 
 ![Sentinel-2 multi-band imaging overview](https://github.com/JNathan18/Banner/blob/main/image.png)
 
 ### Why only Blue, Green, Red & NIR for this project  
-1. **All at 10 m** → keeps spatial detail consistent.  
-2. Blue/Green penetrate the water column; Red enhances benthic discrimination; NIR gives razor-sharp land/water masks.  
-3. Four channels = smaller tensors → faster training & real-time inference on edge devices.
-4. Enables computation of NDWI masks for our regions
+1. All bands are at 10 m which keeps spatial detail consistent.  
+2. Blue/Green penetrate the water column; Red enhances benthic discrimination. 
+3. Just four channels means smaller tensors which means faster training & real-time inference on edge devices.
+4. NIR enables computation of NDWI masks for our regions.
 
 ## Convolutional Neural Networks (CNNs)
 
-A **Convolutional Neural Network** is the deep-learning work-horse for image recognition.  
+A Convolutional Neural Network is the deep-learning work-horse for image recognition.  
 Conceptually, it mimics the way our visual cortex processes information: small receptive fields
 scan across the scene, detect primitive patterns (edges, corners, colour blobs), and pass
-progressively richer abstractions to later layers that decide *what* the image contains.
+progressively richer abstractions to later layers that decide what the image contains.
 
 **How it works**
 
 1. **Feature-extraction stage** — Every convolutional layer slides a tiny filter  
-   (11 × 11 pixels in our case) over the input, multiplying and summing to produce a *feature map*.  
-   Non-linear activations (ReLU) follow, and an occasional *pooling* step downsamples the map,
+   (11 × 11 pixels in our case) over the input, multiplying and summing to produce a feature map.  
+   Non-linear activations (ReLU) follow, and an occasional pooling step downsamples the map,
    keeping only the most salient responses.  Because the same weights are reused everywhere
-   (*weight sharing*), the network is compact and learns position-invariant patterns.
+   (weight sharing), the network is compact and learns position-invariant patterns.
 
 2. **Classification stage** — Once enough feature maps have been stacked, the 3-D tensor is
    flattened and fed to one or more fully-connected layers.  These dense neurons mix the
