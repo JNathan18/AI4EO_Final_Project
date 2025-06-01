@@ -259,3 +259,5 @@ Li, J., Wang, J., Li, Y., and Liu, D. (2022) ‘An Improved NDWI-Based Method fo
 McFeeters, S.K. (1996) ‘The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features’, *International Journal of Remote Sensing*, 17(7), pp.1425–1432. doi:10.1080/01431169608948714.
 
 Xu, H. (2006) ‘Modification of Normalised Difference Water Index (NDWI) to enhance open water features in remotely sensed imagery’, *International Journal of Remote Sensing*, 27(14), pp.3025–3033. doi:10.1080/01431160600589179.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
