@@ -14,32 +14,54 @@
 <br />
 
 <!-- TABLE OF CONTENTS (clickable) -->
+<!-- TABLE OF CONTENTS (clickable) -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About&nbsp;The&nbsp;Project</a>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#background">Background</a>
+    </li>
+    <li>
+      <a href="#sentinel-2">Sentinel-2</a>
       <ul>
-        <li><a href="#background">Background</a></li>
-        <li><a href="#key-concepts">Key Concepts</a></li>
-        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#mission-at-a-glance">Mission at a glance</a></li>
+        <li><a href="#why-only-blue-green-red--nir-for-this-project">Why only Blue, Green, Red &amp; NIR for this project</a></li>
       </ul>
+    </li>
+    <li>
+      <a href="#convolutional-neural-networks-cnns">Convolutional Neural Networks (CNNs)</a>
+      <ul>
+        <li><a href="#what-are-they">What are they?</a></li>
+        <li><a href="#why-we-chose-a-cnn-for-reef-mapping">Why we chose a CNN for reef mapping</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#ndwi">NDWI</a>
+      <ul>
+        <li><a href="#what-is-it">What is it?</a></li>
+        <li><a href="#why-include-ndwi-in-our-pipeline">Why include NDWI in our pipeline?</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#end-to-end-workflow-at-a-glance">End-to-End Workflow at a Glance</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#datasets-or-inputs">Datasets&nbsp;or&nbsp;Inputs</a></li>
-      </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li>
-      <a href="#acknowledgments">Acknowledgments</a>
-      <ul>
-        <li><a href="#references">References</a></li>
-      </ul>
+      <a href="#license">License</a>
+    </li>
+    <li>
+      <a href="#contact">Contact</a>
+    </li>
+    <li>
+      <a href="#acknowledgements">Acknowledgements</a>
+    </li>
+    <li>
+      <a href="#refrences">Refrences</a>
     </li>
   </ol>
 </details>
@@ -185,8 +207,25 @@ Developed in [Google Colab](https://colab.research.google.com/), this project le
    Each cell walks you through preprocessing, training the CNN, applying the NDWI filter, evaluating predictions, and generating outputs.  
    Inline comments provide further guidance throughout.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Contact
 Jonathan McLennan - [jonomclennan@gmail.com](mailto:jonomclennan@gmail.com) / [zcapmcl@ucl.ac.uk](mailto:zcapmcl@ucl.ac.uk) / [https://www.linkedin.com/in/jonathan-mclennan](https://www.linkedin.com/in/jonathan-mclennan-172039236/)
 
 Project Link: 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Acknowledgements
+
+This project was created for GEOL0069 at University College London. This module taught by professor Dr. Michel Tsamados and Weibin Chen.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Refrences
