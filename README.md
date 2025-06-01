@@ -228,4 +228,14 @@ This project was created for GEOL0069 at University College London. This module 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Refrences
+## References
+
+Allen Coral Atlas (n.d.) *Mapping Methods*. Available at: https://allencoralatlas.org/methods/ (Accessed: 2 June 2025).
+
+Coral Reef Alliance (n.d.) *Why Care About Reefs: Biodiversity*. Available at: https://coral.org/en/coral-reefs-101/why-care-about-reefs/biodiversity/ (Accessed: 2 June 2025).
+
+Huang, H., Asner, G. P., Vaughn, N., Knapp, D. E., & Martin, R. E. (2022) ‘Automated Coral Reef Classification with Remote Sensing and Machine Learning’, *Remote Sensing*, 14(11), p.2666. doi:10.3390/rs14112666.
+
+NOAA (2024) *Coral Reefs and Climate Change*. Available at: https://oceanservice.noaa.gov/facts/coralreef-climate.html (Accessed: 2 June 2025).
+
+Phys.org (2025) *Could satellites be the solution to tracking coral reef health?* Available at: https://phys.org/news/2025-04-satellites-solution-tracking-coral-reef.html (Accessed: 2 June 2025).
