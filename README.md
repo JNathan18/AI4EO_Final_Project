@@ -92,6 +92,23 @@ They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
 3. Four channels = smaller tensors → faster training & real-time inference on edge devices.
 4. Enables computation of NDWI masks for our regions
 
+### Convolutional Neural Network — our lightweight reef–classifier core  
+![Convolutional Neural Network architecture](assets/cnn_architecture.png)
+
+#### What is a CNN?
+A Convolutional Neural Network (CNN) is a two-stage pipeline:
+
+| Stage | Building blocks | Purpose |
+|-------|-----------------|---------|
+| **Feature extraction** | Convolution → (ReLU) → Pooling  | Learns small, reusable filters that detect shapes, edges, and textures. |
+| **Classification** | Fully-connected layers + Soft-max | Combines those features to assign each input to a class. |
+
+Because the same filters “slide” across the whole image (weight sharing), CNNs capture spatial patterns while keeping the model compact.
+
+### Why it fits our reef mapper 
+* **Locality** – Convolutions focus on neighbourhoods just a few pixels wide, ideal for picking up benthic textures at 10 m resolution.  
+* **Lightweight** – A shallow CNN with four 10 m bands (B2-B4, B8) stays under ~1 MB when quantised, so it runs on edge devices and still yields intelligible explanations.
+
 ### Methodology
 [Describe your overall approach or algorithm.  
 Bullet points or sub-headings (“Data Pre-processing”, “Model”, “Evaluation”) often read well here.]
