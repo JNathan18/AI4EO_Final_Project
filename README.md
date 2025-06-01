@@ -3,7 +3,7 @@
 
 <!-- PROJECT LOGO / BANNER -->
 <!-- Replace the src URL or delete completely -->
-![title_banner](https://github.com/JNathan18/Banner/blob/main/GBR_Logo.jpg)
+![title_banner](https://github.com/JNathan18/Banner/blob/main/GBR_Logo2.jpg)
 
 <h1 align="center">[PROJECT TITLE]</h1>
 <p align="center">
