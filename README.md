@@ -51,6 +51,8 @@ This project was developed as the final assignment for the GEOL0069 (AI for Eart
 
 In this project, we apply supervised learning to extract a range of shallow reef features from satellite imagery. We focus on data from Sentinel-2, chosen for its high-resolution multispectral capabilities; an essential requirement for our algorithm of choice, the Convolutional Neural Network (CNN). The aim is to demonstrate how modern ML tools can support ecological monitoring by providing a minimal-footprint workflow that anyone can run on free Sentinel-2 imagery to generate habitat predictions from scratch with only a handful of hand-labelled pixels.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Background
 
 Shallow reef zones are among the most biodiverse ecosystems on Earth, supporting nearly 25% of all marine species. These structures play vital roles in coastal protection, fisheries, and global biodiversity. However, they are increasingly under threat from climate change, coral bleaching, pollution, and destructive human activity.
@@ -58,6 +60,8 @@ Shallow reef zones are among the most biodiverse ecosystems on Earth, supporting
 Accurately classifying these features using satellite imagery and machine learning allows us to monitor reef health at scale, detect early signs of degradation, and support conservation planning. This is essential for protecting ecosystems that are both ecologically rich and critically endangered.
 
 Traditional benthic surveys cannot keep pace across thousands of dispersed reefs, and global mapping products like the Allen Coral Atlas, although invaluable, are computationally heavy and rely on extensive training data that may not exist for every site. Because our pipeline needs just two co-registered tiles, the method can be ported along a reef tract in hours, supporting near-real-time monitoring after storms or heatwaves.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Sentinel-2 
 
@@ -80,24 +84,17 @@ The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the sa
 3. Just four channels means smaller tensors which means faster training & real-time inference on edge devices.
 4. NIR enables computation of NDWI masks for our regions.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Convolutional Neural Networks (CNNs)
 
-A Convolutional Neural Network is the deep-learning work-horse for image recognition.  
-Conceptually, it mimics the way our visual cortex processes information: small receptive fields
-scan across the scene, detect primitive patterns (edges, corners, colour blobs), and pass
-progressively richer abstractions to later layers that decide what the image contains.
+A Convolutional Neural Network is the deep-learning work-horse for image recognition. Conceptually, it mimics the way our visual cortex processes information: small receptive fields scan across the scene, detect primitive patterns (edges, corners, colour blobs), and pass progressively richer abstractions to later layers that decide what the image contains.
 
 **How it works**
 
-1. **Feature-extraction stage** — Every convolutional layer slides a tiny filter  
-   (11 × 11 pixels in our case) over the input, multiplying and summing to produce a feature map.  
-   Non-linear activations (ReLU) follow, and an occasional pooling step downsamples the map,
-   keeping only the most salient responses.  Because the same weights are reused everywhere
-   (weight sharing), the network is compact and learns position-invariant patterns.
+1. **Feature-extraction stage** — Every convolutional layer slides a tiny filter (11 × 11 pixels in our case) over the input, multiplying and summing to produce a feature map. Non-linear activations (ReLU) follow, and an occasional pooling step downsamples the map, keeping only the most salient responses.  Because the same weights are reused everywhere (weight sharing), the network is compact and learns position-invariant patterns.
 
-2. **Classification stage** — Once enough feature maps have been stacked, the 3-D tensor is
-   flattened and fed to one or more fully-connected layers.  These dense neurons mix the
-   extracted cues and output a probability for each class via a soft-max function.
+2. **Classification stage** — Once enough feature maps have been stacked, the 3-D tensor is flattened and fed to one or more fully-connected layers.  These dense neurons mix the extracted cues and output a probability for each class via a soft-max function.
 
 <div align="center">
 
@@ -107,18 +104,11 @@ progressively richer abstractions to later layers that decide what the image con
 
 ### Why we chose a CNN for reef mapping
 
-* **Locality at 10 m** – Convolutions inspect only a handful of pixels at a time, perfect for
-  teasing apart benthic textures (live coral, algae, sand) that occupy just a few Sentinel-2
-  pixels.
+* **Locality at 10 m** – Convolutions inspect only a handful of pixels at a time, perfect for teasing apart benthic textures (live coral, algae, sand) that occupy just a few Sentinel-2 pixels.
 
-* **Model economy** – With only the four 10 m bands (Blue, Green, Red, NIR) as input, a shallow
-  CNN compiles to < 1 MB when quantised.  That means real-time inference on edge devices
-  (drones, Raspberry Pi) without a GPU.
+* **Model economy** – With only the four 10 m bands (Blue, Green, Red, NIR) as input, a shallow CNN compiles to < 1 MB when quantised.  That means real-time inference on edge devices (drones, Raspberry Pi) without a GPU.
 
-* **Explainability hooks** – Gradient-based saliency maps and Grad-CAM can be applied directly to
-  the convolutional feature maps, letting us *see* which reef patches the network relied on and
-  verify that its decisions are geologically sensible.
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Methodology
 [Describe your overall approach or algorithm.  
