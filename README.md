@@ -136,7 +136,7 @@ A lightweight CNN like ours may confuse deep ocean noise for genuine reef signal
    An NDWI layer will also be added as a 5ᵗʰ channel to every 11 × 11 patch.
 
 3. **Define Regions of Interest (ROIs)**  
-   Draw polygons on one “reference” tile covering reef flat, shallow sand, etc.
+   Draw polygons on multiple reference tiles covering reef flat, shallow sand, etc.
 
 4. **Label the ROIs with IRIS**  
    Intelligently Reinforced Image Segmentation (IRIS) software auto-classifies polygons and exports pixel-wise masks.
