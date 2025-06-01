@@ -77,26 +77,26 @@ In this project, we apply supervised learning to extract a range of shallow reef
 
 ## Background
 
-Shallow reef zones are among the most biodiverse ecosystems on Earth, supporting nearly 25% of all marine species. These structures play vital roles in coastal protection, fisheries, and global biodiversity. However, they are increasingly under threat from climate change, coral bleaching, pollution, and destructive human activity.
+Shallow reef zones are among the most biodiverse ecosystems on Earth, supporting nearly 25% of all marine species (Coral Reef Alliance, n.d.). These structures play vital roles in coastal protection, fisheries, and global biodiversity. However, they are increasingly under threat from climate change, coral bleaching, pollution, and destructive human activity.
 
-Accurately classifying these features using satellite imagery and machine learning allows us to monitor reef health at scale, detect early signs of degradation, and support conservation planning. This is essential for protecting ecosystems that are both ecologically rich and critically endangered.
+Accurately classifying these features using satellite imagery and machine learning allows us to monitor reef health at scale, detect early signs of degradation, and support conservation planning (Phys.org, 2025; Huang et al., 2022). This is essential for protecting ecosystems that are both ecologically rich and critically endangered.
 
-Traditional benthic surveys cannot keep pace across thousands of dispersed reefs, and global mapping products like the Allen Coral Atlas, although invaluable, are computationally heavy and rely on extensive training data that may not exist for every site. Because our pipeline needs just two co-registered tiles, the method can be ported along a reef tract in hours, supporting near-real-time monitoring after storms or heatwaves.
+Traditional benthic surveys cannot keep pace across thousands of dispersed reefs, and global mapping products like the Allen Coral Atlas, although invaluable, are computationally heavy and rely on extensive training data that may not exist for every site (Allen Coral Atlas, n.d.). Because our pipeline needs just two co-registered tiles, the method can be ported along a reef tract in hours, supporting near-real-time monitoring after storms or heatwaves.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Sentinel-2 
 
 ### Mission at a glance  
-Sentinel-2 is part of ESA’s Copernicus fleet and comprises the twin satellites Sentinel-2A (2015) and Sentinel-2B (2017).  
-They share a sun-synchronous 786 km orbit, phased 180 ° apart, giving:
+Sentinel-2 is part of ESA’s Copernicus fleet and comprises the twin satellites Sentinel-2A (2015) and Sentinel-2B (2017) (ESA, 2024).  
+They share a sun-synchronous 786 km orbit, phased 180 ° apart (Copernicus Data Space Ecosystem, n.d.), giving:
 
 | Parameter | Value | Why it matters for reefs |
 |-----------|-------|--------------------------|
 | **Revisit time** | 10 days per sat, 5 days combined (equator) | Frequent looks capture bleaching events and seasonal change |
 | **Swath width** | 290 km | One pass covers entire archipelagos |
 
-The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the satellite advances, a single linear detector sweeps out a continuous image strip. Incoming light is folded by three mirrors and split by a beam-splitter onto two focal-plane assemblies (FPAs), one covering the visible to near-infra-red range and the other the short-wave infra-red. Across these FPAs, 13 strip filters carve out the discrete spectral bands used by Sentinel-2: four bands are captured at 10 m ground resolution (blue, green, red, NIR), six at 20 m, and three at 60 m.
+The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the satellite advances, a single linear detector sweeps out a continuous image strip. Incoming light is folded by three mirrors and split by a beam-splitter onto two focal-plane assemblies (FPAs), one covering the visible to near-infra-red range and the other the short-wave infra-red. Across these FPAs, 13 strip filters carve out the discrete spectral bands used by Sentinel-2: four bands are captured at 10 m ground resolution (blue, green, red, NIR), six at 20 m, and three at 60 m (NASA Earthdata, n.d.).
 
 ![Sentinel-2 multi-band imaging overview](https://github.com/JNathan18/Banner/blob/main/image.png)
 
@@ -112,11 +112,11 @@ The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the sa
 
 ### What are they?
 
-A Convolutional Neural Network is the deep-learning work-horse for image recognition. Conceptually, it mimics the way our visual cortex processes information: small receptive fields scan across the scene, detect primitive patterns (edges, corners, colour blobs), and pass progressively richer abstractions to later layers that decide what the image contains.
+A Convolutional Neural Network is the deep-learning work-horse for image recognition. Conceptually, it mimics the way our visual cortex processes information: small receptive fields scan across the scene, detect primitive patterns (edges, corners, colour blobs), and pass progressively richer abstractions to later layers that decide what the image contains (O'Shea and Nash, 2015).
 
 **How it works**
 
-1. **Feature-extraction stage:** Every convolutional layer slides a tiny filter (11 × 11 pixels in our case) over the input, multiplying and summing to produce a feature map. Non-linear activations (ReLU) follow, and an occasional pooling step downsamples the map, keeping only the most salient responses.  Because the same weights are reused everywhere (weight sharing), the network is compact and learns position-invariant patterns.
+1. **Feature-extraction stage:** Every convolutional layer slides a tiny filter (11 × 11 pixels in our case) over the input, multiplying and summing to produce a feature map. Non-linear activations (ReLU) follow (Olamendy, 2023), and an occasional pooling step downsamples the map, keeping only the most salient responses (Encord, 2023).  Because the same weights are reused everywhere (weight sharing), the network is compact and learns position-invariant patterns.
 
 2. **Classification stage:** Once enough feature maps have been stacked, the 3-D tensor is flattened and fed to one or more fully-connected layers.  These dense neurons mix the extracted cues and output a probability for each class via a soft-max function.
 
@@ -134,7 +134,7 @@ Convolutions inspect only a handful of pixels at a time, perfect for teasing apa
 
 ## NDWI  
 ### What is it?
-The Normalised Difference Water Index (NDWI) was introduced by McFeeters (1996) as a simple way to highlight open water using only two spectral bands:
+The Normalised Difference Water Index (NDWI) was introduced by (McFeeters, 1996) as a simple way to highlight open water using only two spectral bands:
 
 $$
 \text{NDWI} = \frac{\text{Green} - \text{NIR}}{\text{Green} + \text{NIR}}
@@ -145,7 +145,7 @@ $$
 
 ### Why include NDWI in our pipeline?  
  
-A lightweight CNN like ours may confuse deep ocean noise for genuine reef signals. By introducing an NDWI filter, we reduce spurious detections by masking out areas unlikely to contain water. The index is also invariant to overall brightness (ratio form), so it supplies contrast information that the four raw Sentinel-2 bands (Blue, Green, Red, NIR) do not capture on their own. This gives the CNN crucial context for distinguishing where ‘wet’ ends and ‘dry’ begins. On top of this it is lightweight on compute and can be performed as a one line operation on-the-fly during data loading.
+A lightweight CNN like ours may confuse deep ocean noise for genuine reef signals. By introducing an NDWI filter, we reduce spurious detections by masking out areas unlikely to contain water (Li et al., 2022). The index is also invariant to overall brightness (ratio form), so it supplies contrast information that the four raw Sentinel-2 bands (Blue, Green, Red, NIR) do not capture on their own (Xu, 2006). This gives the CNN crucial context for distinguishing where ‘wet’ ends and ‘dry’ begins. On top of this it is lightweight on compute and can be performed as a one line operation on-the-fly during data loading.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -239,3 +239,21 @@ Huang, H., Asner, G. P., Vaughn, N., Knapp, D. E., & Martin, R. E. (2022) ‘Aut
 NOAA (2024) *Coral Reefs and Climate Change*. Available at: https://oceanservice.noaa.gov/facts/coralreef-climate.html (Accessed: 2 June 2025).
 
 Phys.org (2025) *Could satellites be the solution to tracking coral reef health?* Available at: https://phys.org/news/2025-04-satellites-solution-tracking-coral-reef.html (Accessed: 2 June 2025).
+
+Copernicus Data Space Ecosystem (n.d.) *Sentinel-2*. Available at: https://dataspace.copernicus.eu/explore-data/data-collections/sentinel-data/sentinel-2 (Accessed: 2 June 2025).
+
+NASA Earthdata (n.d.) *Sentinel-2 MSI*. Available at: https://www.earthdata.nasa.gov/data/instruments/sentinel-2-msi (Accessed: 2 June 2025).
+
+ESA (2024) *Sentinel-2: The Operational Copernicus Optical High Resolution Land Mission*. Available at: https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-2 (Accessed: 2 June 2025).
+
+Encord (2023) *Convolutional Neural Networks (CNN) Overview*. Available at: https://encord.com/blog/convolutional-neural-networks-explained/ (Accessed: 2 June 2025).
+
+Olamendy, J.C. (2023) 'Back to Basics: Feature Extraction with CNN', *Medium*, 20 October. Available at: https://medium.com/@juanc.olamendy/back-to-basics-feature-extraction-with-cnn-16b2d405011a (Accessed: 2 June 2025).
+
+O'Shea, K. and Nash, R. (2015) 'An Introduction to Convolutional Neural Networks', *arXiv preprint arXiv:1511.08458*. Available at: https://arxiv.org/abs/1511.08458 (Accessed: 2 June 2025).
+
+Li, J., Wang, J., Li, Y., and Liu, D. (2022) ‘An Improved NDWI-Based Method for Surface Water Extraction Using Sentinel-2 Imagery’, *Remote Sensing*, 14(2), p.292. doi:10.3390/rs14020292.
+
+McFeeters, S.K. (1996) ‘The use of the Normalized Difference Water Index (NDWI) in the delineation of open water features’, *International Journal of Remote Sensing*, 17(7), pp.1425–1432. doi:10.1080/01431169608948714.
+
+Xu, H. (2006) ‘Modification of Normalised Difference Water Index (NDWI) to enhance open water features in remotely sensed imagery’, *International Journal of Remote Sensing*, 27(14), pp.3025–3033. doi:10.1080/01431160600589179.
