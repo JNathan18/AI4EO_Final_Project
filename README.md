@@ -185,3 +185,7 @@ Developed in [Google Colab](https://colab.research.google.com/), this project le
    Each cell walks you through preprocessing, training the CNN, applying the NDWI filter, evaluating predictions, and generating outputs.  
    Inline comments provide further guidance throughout.
 
+## Contact
+Jonathan McLennan - [jonomclennan@gmail.com](mailto:jonomclennan@gmail.com)
+Project Link - 
+
