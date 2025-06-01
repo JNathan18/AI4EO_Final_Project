@@ -88,6 +88,8 @@ The Sentinel-2 Multi-Spectral Instrument (MSI) is a push-broom camera: as the sa
 
 ## Convolutional Neural Networks (CNNs)
 
+### What are they?
+
 A Convolutional Neural Network is the deep-learning work-horse for image recognition. Conceptually, it mimics the way our visual cortex processes information: small receptive fields scan across the scene, detect primitive patterns (edges, corners, colour blobs), and pass progressively richer abstractions to later layers that decide what the image contains.
 
 **How it works**
@@ -109,7 +111,7 @@ Convolutions inspect only a handful of pixels at a time, perfect for teasing apa
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## NDWI  
-
+### What is it?
 The Normalised Difference Water Index (NDWI) was introduced by McFeeters (1996) as a simple way to highlight open water using only two spectral bands:
 
 $$
