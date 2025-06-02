@@ -233,6 +233,10 @@ This project was created for GEOL0069 at University College London. This module 
 
 ## References
 
+Hansen, K. (2023) ‘Confronting Florida’s Coral Collapse’. NASA Earth Observatory, 8 August. Available at: https://earthobservatory.nasa.gov/images/151692/confronting-floridas-coral-collapse (Accessed: 2 June 2025).
+
+Great Barrier Reef Marine Park Authority (GBRMPA) (2017) Final report: 2016 coral bleaching event on the Great Barrier Reef. Townsville: GBRMPA. Available at: https://www.gbrmpa.gov.au/sites/default/files/2016%20Coral%20Bleaching%20Event%20Final%20Assessment%20Report.pdf (Accessed: 2 June 2025).
+
 CodeCarbon (2025) CodeCarbon: Estimate and Track Carbon Emissions from Machine Learning Computing. Available at: https://pypi.org/project/codecarbon/ (Accessed: 29 May 2025).
 
 Allen Coral Atlas (n.d.) *Mapping Methods*. Available at: https://allencoralatlas.org/methods/ (Accessed: 2 June 2025).
