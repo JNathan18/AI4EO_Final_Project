@@ -177,7 +177,8 @@ A lightweight CNN like ours may confuse deep ocean noise for genuine reef signal
    Predict on a second, previously untouched tile; NDWI recomputed on-the-fly.
 
 8. **Evaluate & analyse**  
-   This includes a Confusion matrix as well as f1-scores, precision, recall and accuracy for our classes, overlay of our classification against the ACA as the ground truth.
+   This includes a Confusion matrix as well as f1-scores, precision, recall and accuracy for our classes, overlay of our classification against the ACA as the ground truth. Here we also 
+   discuss the environmental impact of training such a model.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
