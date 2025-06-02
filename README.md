@@ -81,7 +81,11 @@ Shallow reef zones are among the most biodiverse ecosystems on Earth, supporting
 
 Accurately classifying these features using satellite imagery and machine learning allows us to monitor reef health at scale, detect early signs of degradation, and support conservation planning (Phys.org, 2025; Huang et al., 2022). This is essential for protecting ecosystems that are both ecologically rich and critically endangered.
 
-Traditional benthic surveys cannot keep pace across thousands of dispersed reefs, and global mapping products like the Allen Coral Atlas, although invaluable, are computationally heavy and rely on extensive training data that may not exist for every site (Allen Coral Atlas, n.d.). Because our pipeline needs just two co-registered tiles, the method can be ported along a reef tract in hours, supporting near-real-time monitoring after storms or heatwaves.
+Traditional benthic surveys cannot keep pace with events that unfold on the scale of weeks, and even the best global products refresh too slowly for crisis response. For example, record-breaking water temperatures in the Florida Keys in July 2023 triggered widespread bleaching, yet the first high-resolution satellite comparison that managers could view was not published by NASA Earth Observatory until 8 August 2023, weeks after colonies had already begun to die (Hansen 2023). 
+
+During the 2016 mass-bleaching of the Great Barrier Reef, the initial reef-wide aerial surveys finished in early June 2016, but a second round to assess survivorship did not start until mid-September, a six-month gap when many corals either recovered or perished unseen (Great Barrier Reef Marine Park Authority 2017). 
+
+As a proof-of-concept, our pipeline shows that with just two co-registered tiles it is possible to generate baseline coral-cover maps for an entire reef tract within hours rather than weeks. While the current code does not yet quantify storm or bleaching damage, the workflow demonstrates a lightweight, emission-friendly and easily ported method that could give managers a timely snapshot to prioritise where to send divers, close fisheries, or protect nurseries.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
