@@ -49,6 +49,9 @@
       <a href="#end-to-end-workflow-at-a-glance">End-to-End Workflow at a Glance</a>
     </li>
     <li>
+      <a href="#video-tutorial-on-the-code">Video Tutorial on the Code</a>
+    </li>
+    <li>
       <a href="#getting-started">Getting Started</a>
     </li>
     <li>
@@ -180,8 +183,11 @@ A lightweight CNN like ours may confuse deep ocean noise for genuine reef signal
    This includes a Confusion matrix as well as f1-scores, precision, recall and accuracy for our classes, overlay of our classification against the ACA as the ground truth. Here, we 
    also discuss the environmental impact of training such a model.
 
-**For more details, see the video link provided below:**
-[(https://www.youtube.com/watch?v=d3tk6PJQwNU/0.jpg)](https://www.youtube.com/watch?v=d3tk6PJQwNU)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Video Tutorial on the Code
+
+[![Watch the walkthrough](https://img.youtube.com/vi/d3tk6PJQwNU/0.jpg)](https://www.youtube.com/watch?v=d3tk6PJQwNU)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
