@@ -213,8 +213,9 @@ Developed in [Google Colab](https://colab.research.google.com/), this project le
    - Update paths to Sentinel-2 `.npy` or `.jp2` files.
    - Set the path to the ACA mask or shapefile used for evaluation.
 
-   If you are using the same data as the original notebook, minimal changes should be needed.  
-   If using your own data, remember to adjust file names and region-of-interest definitions accordingly.
+   If you are using the same data as the original notebook, minimal changes should be needed, just download the masks provided in the repo and provide paths to them.
+   If using your own data, remember to adjust file names and region-of-interest definitions accordingly, I have provided `config.json` so that you can download and edit to create your 
+   own training data within IRIS.
 
 5. **Run the notebook cells in order**  
    Each cell walks you through preprocessing, training the CNN, applying the NDWI filter, evaluating predictions, and generating outputs.  
